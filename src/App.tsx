@@ -64,19 +64,47 @@ function App(){
             </Grid>
         </Grid>
         <Grid container spacing={theme.spacing(1)} sx={{
-          marginTop:
+          marginTop:'10px',
         }}>
-          <Grid item>
-              <Typography variant='caption' sx={{
-                display:'flex',
-                alignItems:'center',
-                gap:theme.spacing(1)
-              }}>
-                <span>Tarefas criadas</span>
-                <Badge color='primary' badgeContent={0} showZero></Badge>
-                
-              </Typography>
-          </Grid>
+           <Grid item sx={{
+                    display:'flex',
+                    alignItems:'center',
+                    justifyContent:'space-between',
+                    padding:'20px',
+                    width:'100%',
+                    marginTop:'45px'
+
+                  }}>
+                    <Typography >
+                      <span>Tarefas criadas</span>
+                     <Badge color='primary' badgeContent={0} showZero></Badge>
+                    </Typography>
+                    <Typography>
+                    <span>Concluidas</span>
+                     <Badge color='primary' badgeContent={0} showZero></Badge>
+                     </Typography>
+                 </Grid>
+                 <Grid item sx={{
+                    borderTop:'2px solid'
+                  }}>
+                       <Card sx={{ width: '100%',
+                      display:'flex',
+                      alignItems:'center',
+                      flexDirection:'column',
+                      padding:'18px',
+                       }}>
+                       <ClipboardText size={32} weight="fill" />
+
+                       <Typography>
+                      <span>Você ainda não tem tarefas cadastradas</span>    
+                    </Typography>
+
+                    <Typography>
+                      <span>Crie tarefas e organize seus itens as fazer</span>    
+                    </Typography>
+
+                       </Card>
+                  </Grid>
         </Grid>
         </Container>
       </main>
@@ -84,6 +112,7 @@ function App(){
 
       
     </ThemeProvider>
+
   )
 }
 
