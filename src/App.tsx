@@ -1,8 +1,8 @@
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import  CssBaseline  from '@mui/material/CssBaseline';
-import { AppBar, Toolbar, Typography, useTheme, Grid, TextField, Container, Button, colors, Badge } from '../node_modules/@mui/material/index';
-import { PlusCircle } from '../node_modules/@phosphor-icons/react/dist/index';
+import { AppBar, Toolbar, Typography, useTheme, Grid, TextField, Container, Button, colors, Badge, Card } from '../node_modules/@mui/material/index';
+import { ClipboardText, PlusCircle } from '../node_modules/@phosphor-icons/react/dist/index';
 import CheckFat from '../node_modules/@phosphor-icons/react/dist/icons/CheckFat';
 
 
@@ -20,10 +20,10 @@ function App(){
   return (
     <ThemeProvider theme={dark}>
       <CssBaseline />
-      <AppBar positiopn="static">
+      <AppBar position='static'>
         <Toolbar sx={{
-          paddingTop:theme.space(2),
-          paddingBottom:theme.space(2),
+          paddingTop:theme.spacing(2),
+          paddingBottom:theme.spacing(2),
           display:"flex",
           justifyContent:'center',
           alignItems:'center',
