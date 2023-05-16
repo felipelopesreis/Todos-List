@@ -1,11 +1,13 @@
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import  CssBaseline  from '@mui/material/CssBaseline';
-import { AppBar, Toolbar, Typography, useTheme, Grid, TextField, Container, Button, colors, Badge, Card } from '../node_modules/@mui/material/index';
+
+
+import { AppBar, Toolbar, Typography, Grid, TextField, Container, Button, colors, Badge, Card, CssBaseline, } from '../node_modules/@mui/material/index';
 import { ClipboardText, PlusCircle } from '../node_modules/@phosphor-icons/react/dist/index';
 import CheckFat from '../node_modules/@phosphor-icons/react/dist/icons/CheckFat';
 import { useEffect, useState } from 'react';
-import { Task } from './Types';
+import { Task } from './Types/index';
+import { useTheme, ThemeProvider } from '@mui/material/styles';
+
 
 
 const dark = createTheme({
