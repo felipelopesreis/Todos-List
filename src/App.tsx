@@ -7,6 +7,7 @@ import CheckFat from '../node_modules/@phosphor-icons/react/dist/icons/CheckFat'
 import { useEffect, useState } from 'react';
 import { Task } from './Types/index';
 import { useTheme, ThemeProvider } from '@mui/material/styles';
+import { BuscandoBanco } from './BuscandoBanco/index';
 
 
 
@@ -17,14 +18,17 @@ const dark = createTheme({
 })
 
 
-
-function App(){  
+function App(){
 
   const theme =useTheme();
   const [tasks,setTasks] = useState<Task[]>()
 
   useEffect(()=>{
+async function tarefasMostrar(){
+  setTasks(await get())
 
+}
+tarefasMostrar()
   },[])
   return (
     <ThemeProvider theme={dark}>
@@ -96,23 +100,11 @@ function App(){
                  <Grid item sx={{
                     borderTop:'2px solid'
                   }}>
-                       <Card sx={{ width: '100%',
-                      display:'flex',
-                      alignItems:'center',
-                      flexDirection:'column',
-                      padding:'18px',
-                       }}>
-                       <ClipboardText size={32} weight="fill" />
-
-                       <Typography>
-                      <span>Você ainda não tem tarefas cadastradas</span>    
-                    </Typography>
-
-                    <Typography>
-                      <span>Crie tarefas e organize seus itens as fazer</span>    
-                    </Typography>
-
-                       </Card>
+                    {
+                       tasks.map(novaTask =>(
+                        <BuscandoBanco tarefaData={novaTask}/>
+                       ))
+}
                   </Grid>
         </Grid>
         </Container>
