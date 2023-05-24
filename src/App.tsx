@@ -4,10 +4,13 @@
 import { AppBar, Toolbar, Typography, Grid, TextField, Container, Button, colors, Badge, Card, CssBaseline, } from '../node_modules/@mui/material/index';
 import { ClipboardText, PlusCircle } from '../node_modules/@phosphor-icons/react/dist/index';
 import CheckFat from '../node_modules/@phosphor-icons/react/dist/icons/CheckFat';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { Task } from './Types/index';
-import { useTheme, ThemeProvider } from '@mui/material/styles';
+
 import { BuscandoBanco } from './BuscandoBanco/index';
+import { getAll, save } from './Service/Api';
+import { useTheme } from '../node_modules/@emotion/react/types/theming';
+import { ThemeProvider } from '../node_modules/@emotion/react/types/index';
 
 
 
@@ -21,15 +24,34 @@ const dark = createTheme({
 function App(){
 
   const theme =useTheme();
-  const [tasks,setTasks] = useState<Task[]>()
+  const [tasks,setTasks] = useState<Task[]>([])
+
+  const [tasks2, setTasks2] = useState<Task>({
+    description: '',
+    done: false,
+  });
 
   useEffect(()=>{
-async function tarefasMostrar(){
-  setTasks(await get())
+    async function tarefasMostrar(){
+      setTasks(await getAll())
+    
+    }
+    tarefasMostrar()
+      },[])
 
+  const ListarTarefasFormulario = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const inputElement = event.currentTarget.querySelector('input[name="descricaoTarefa"]');
+    let description: string = inputElement?.getAttribute('value') || '';
+    let novasTasks:Task={
+    description,
+    done:false
 }
-tarefasMostrar()
-  },[])
+  save(novasTasks);
+  setTasks([...tasks, novasTasks]);
+  setTasks2({ description:'', done: false });
+  };
+
   return (
     <ThemeProvider theme={dark}>
       <CssBaseline />
@@ -55,6 +77,7 @@ tarefasMostrar()
         </Toolbar>
       </AppBar>
       <main>
+        <form onSubmit={ListarTarefasFormulario}>
         <Container sx={{
           position: 'relative',
           paddingTop: '50px'
@@ -64,12 +87,13 @@ tarefasMostrar()
           top:'-27px'
         }}>
             <Grid item xl={10} sm={12}>
-                <TextField name="task" fullWidth sx={{
+                <TextField type='text'  name="descricaoTarefa" value={tasks2.description}
+                 onChange={(event) => setTasks2({ ...tasks2, description: event.target.value })}  fullWidth sx={{
                   backgroundColor:colors.grey[800]
                 }}/>
             </Grid>
             <Grid item xl={2} sm={12}>
-                  <Button variant="contained" fullWidth sx={{
+                  <Button type='submit' variant="contained" fullWidth sx={{
                     height:'100%'
                   }}>
                     <span>Criar</span><PlusCircle size={32} />
@@ -102,12 +126,13 @@ tarefasMostrar()
                   }}>
                     {
                        tasks.map(novaTask =>(
-                        <BuscandoBanco tarefaData={novaTask}/>
+                        <BuscandoBanco key={novaTask.id} tarefaData={novaTask}/>
                        ))
 }
                   </Grid>
         </Grid>
         </Container>
+        </form>
       </main>
      
 

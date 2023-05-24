@@ -1,5 +1,6 @@
-import axios from 'axios'
-import { Task } from '../Types';
+import axios from '../../node_modules/axios/index';
+import { Task } from '../Types/index';
+
 
 const api = axios.create({
     baseURL: 'http://localhost:3000',
